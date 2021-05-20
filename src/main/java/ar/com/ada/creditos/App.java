@@ -1,10 +1,7 @@
 package ar.com.ada.creditos;
 
-/**
- * Hello world!
- *
- * 
- */
+//pasar todo el codigo de main
+
 public class App 
 {
     public static void main( String[] args )
