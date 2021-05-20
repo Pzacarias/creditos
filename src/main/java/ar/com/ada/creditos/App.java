@@ -1,11 +1,13 @@
 package ar.com.ada.creditos;
 
-//pasar todo el codigo de main
 
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
-        System.out.println( "Hello World!" );
+        ABM miABM = new ABM();
+
+        miABM.iniciar();
+
     }
 }
