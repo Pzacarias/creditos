@@ -53,7 +53,11 @@ public class Cliente {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws ClienteNombreException{
+        if(nombre.isEmpty()){
+            throw new ClienteNombreException(this, "ocurrio un error con el nombre");
+        }
+
         this.nombre = nombre;
     }
 
