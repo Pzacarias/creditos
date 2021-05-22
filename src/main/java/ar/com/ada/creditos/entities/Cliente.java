@@ -2,6 +2,7 @@ package ar.com.ada.creditos.entities;
 
 
 import java.util.Date;
+import java.util.Scanner;
 
 import javax.persistence.*;
 
@@ -12,6 +13,8 @@ import ar.com.ada.creditos.excepciones.*;
 @Entity
 @Table(name = "cliente")
 public class Cliente {
+    public static Scanner Teclado = new Scanner(System.in);
+
     @Id
     @Column(name = "cliente_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //AUTOINCREMENTAL
@@ -53,12 +56,14 @@ public class Cliente {
         return nombre;
     }
 
-    public void setNombre(String nombre) throws ClienteNombreException{
-        if(nombre.isEmpty()){
-            throw new ClienteNombreException(this, "ocurrio un error con el nombre");
+    public void setNombre(String nombre) {
+        if (nombre.isEmpty()) {
+            System.out.println("Por favor ingrese un nombre válido.");
+           nombre = Teclado.nextLine();
+           this.nombre = nombre;
         }
+        else this.nombre = nombre;
 
-        this.nombre = nombre;
     }
 
     public void setDni(int dni) throws ClienteDNIException {
@@ -85,7 +90,12 @@ public class Cliente {
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        if (direccion.isEmpty()) {
+            System.out.println("Por favor ingrese una dirección válida.");
+           direccion = Teclado.nextLine();
+           this.direccion = direccion;
+        }
+        else this.direccion = direccion;
     }
 
     public String getDireccionAlternativa() {

@@ -36,8 +36,6 @@ public class ABM {
                             alta();
                         } catch (ClienteDNIException exdni) {
                             System.out.println("Error en el DNI. Indique uno valido");
-                        } catch (ClienteNombreException exnombre){
-                            System.out.println("Error en el nombre. Indique uno valido");
                         }
                         break;
 
@@ -99,7 +97,7 @@ public class ABM {
         if (domAlternativo != null)
             cliente.setDireccionAlternativa(domAlternativo);
 
-        System.out.println("Ingrese fecha de nacimiento:");
+        System.out.println("Ingrese fecha de nacimiento (dd/mm/aaaa):");
         Date fecha = null;
         DateFormat dateformatArgentina = new SimpleDateFormat("dd/MM/yy");
 
