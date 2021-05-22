@@ -9,6 +9,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.NaturalId;
 
 import ar.com.ada.creditos.excepciones.*;
+import java.util.*;
 
 @Entity
 @Table(name = "cliente")
@@ -34,6 +35,16 @@ public class Cliente {
     @Temporal(TemporalType.DATE) //SOLO Poner esto si no queremos manejar HORA en el DB Server.
     private Date fechaNacimiento;
     
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Prestamo> prestamos = new ArrayList<>();
+    
+   
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+
+
     public Cliente(String nombre) {
         this.nombre = nombre;
 
@@ -112,5 +123,15 @@ public class Cliente {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    
+
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
+
+    public void agregarPrestamo(Prestamo prestamo){
+        this.prestamos.add(prestamo);
     }
 }
