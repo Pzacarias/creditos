@@ -6,12 +6,12 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "prestamo")
+@Table(name = "prestamo")
 public class Prestamo {
-    
+
     @Id
-    @Column (name = "prestamo_id")
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "prestamo_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prestamoId;
 
     @Temporal(TemporalType.DATE)
@@ -21,11 +21,14 @@ public class Prestamo {
 
     private int cuotas;
 
-    @Column (name = "fecha_alta")
+    @Column(name = "fecha_alta")
     private Date fechaAlta;
 
-    @ManyToOne //columna en la tabla prestamo -- columna en la tabla cliente
-    @JoinColumn (name = "cliente_id", referencedColumnName = "cliente_id")
+    @Column(name = "estado_id")
+    private int estadoId; // Por ahora vamos a crear este como int
+
+    @ManyToOne // columna en la tabla prestamo -- columna en la tabla cliente
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
 
     public int getPrestamoId() {
@@ -76,6 +79,43 @@ public class Prestamo {
         this.cliente = cliente;
         this.cliente.agregarPrestamo(this);
     }
-   
 
+    public EstadoPrestamoEnum getEstadoId() {
+
+        return EstadoPrestamoEnum.parse(this.estadoId);
+    }
+    public void setEstadoId(EstadoPrestamoEnum estadoId) {
+        this.estadoId = estadoId.getValue();
+    }
+
+    public enum EstadoPrestamoEnum {
+        SOLICITADO(1), 
+        RECHAZADO(2), 
+        PENDIENTE_APROBACION(3), 
+        APROBADO(4), 
+        INCOBRABLE(5), 
+        CANCELADO(6),
+        PREAPROBADO(100);
+
+        private final int value;
+
+        private EstadoPrestamoEnum(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static EstadoPrestamoEnum parse(int id) {
+            EstadoPrestamoEnum status = null;
+            for (EstadoPrestamoEnum item : EstadoPrestamoEnum.values()) {
+                if (item.getValue() == id) {
+                    status = item;
+                    break;
+                }
+            }
+            return status;
+        }
+    }
 }
