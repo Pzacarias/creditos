@@ -1,3 +1,4 @@
+  
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
@@ -15,6 +16,7 @@
         
     <mapping class="ar.com.ada.creditos.entities.Cliente" />
     <mapping class="ar.com.ada.creditos.entities.Prestamo" />
+    <mapping class="ar.com.ada.creditos.entities.reportes.ReporteCantClientePrestamos" />
      
   </session-factory>
 </hibernate-configuration>
